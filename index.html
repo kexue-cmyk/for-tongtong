@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给彤彤的圣诞惊喜</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #020215; /* 深夜蓝背景 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 圣诞树动画 */
+        .tree {
+            font-size: 80px;
+            filter: drop-shadow(0 0 20px #2e7d32);
+            animation: swing 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+
+        /* 祝福文字样式 */
+        .content {
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to bottom, #ff0000, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 10px 0;
+        }
+
+        .name {
+            font-size: 1.8rem;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px rgba(255, 235, 59, 0.8);
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* 雪花 */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tree">🎄</div>
+    
+    <div class="content">
+        <div class="name">致：彤彤 🍎</div>
+        <h1>圣诞快乐</h1>
+        <p>愿你的世界充满欢笑<br>
+           平安夜平平安安，圣诞节快快乐乐！<br>
+           所有的好运都奔向你 ✨</p>
+    </div>
+
+    <audio id="bgm" loop>
+        <source src="https://api.uomg.com/api/rand.music?sort=热歌榜" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 雪花生成脚本
+        function createSnowflake() {
+            const snow = document.createElement('div');
+            snow.innerHTML = '❄';
+            snow.className = 'snowflake';
+            snow.style.left = Math.random() * 100 + 'vw';
+            snow.style.animationDuration = Math.random() * 3 + 3 + 's';
+            snow.style.opacity = Math.random();
+            snow.style.fontSize = Math.random() * 10 + 10 + 'px';
+            document.body.appendChild(snow);
+            setTimeout(() => { snow.remove(); }, 6000);
+        }
+        setInterval(createSnowflake, 150);
+
+        // 点击屏幕播放音乐（兼容浏览器政策）
+        document.body.addEventListener('click', () => {
+            const audio = document.getElementById('bgm');
+            audio.play();
+        }, { once: true });
+    </script>
+</body>
+</html>
